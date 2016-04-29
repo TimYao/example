@@ -1,0 +1,717 @@
+﻿<!DOCTYPE html>
+<html>
+<body style="height:3000px;">
+
+
+<script>
+//  var F = (function(){
+//      var F = function(){
+//          return new F.fn.init();
+//      };
+//      F.fn = F.prototype = {
+//         constructor:F,
+//         init:function(){
+//             console.log(this);
+//         },
+//         test:function()
+//         {
+//             console.log(this);
+//             console.log('this is test');
+//         }
+//      };
+//      F.fn.init.prototype = F.fn;
+//      return F();
+//  })();
+  //F.test();
+  //console.log(F.__proto__ == F.constructor.prototype);
+  //console.log(F.constructor.prototype);
+  //F.test();
+</script>
+<canvas id="canvas"></canvas>
+<script>
+
+//    if(window.addEventListener)
+//    {
+//        window.addEventListener('load',fn,false);
+//    }else if(window.attachEvent){
+//        window.attachEvent('onload',fn);
+//    }
+//    function fn(ev)
+//    {
+//        var script = document.createElement('script');
+//        script.onreadystatechange=script.onload = function(ev){
+//            var ev = ev || window.event;
+//            //console.log(ev.readyState);//console.log(ev.complete);
+//            //test();
+//            alert(this.readyState);
+//        }
+//        script.src="2.js";
+//        document.getElementsByTagName('head')[0].appendChild(script);
+//
+//    }
+
+//canvas 性能
+//    var canv = document.getElementById('canvas').getContext('2d');
+//    var hcanv = document.createElement('canvas');
+//    var bcan = hcanv.getContext('2d');
+////    document.body.appendChild(hcanv);
+//    bcan.width = 200;
+//    bcan.height=200;
+//    bcan.fillStyle = "red";
+//    bcan.fillRect(0,0,100,100);
+//    canv.drawImage(hcanv,0,0);
+
+</script>
+<style>
+    img {
+    max-width: 100%;
+    height: auto;
+}
+.r{text-decoration:none;display:block;border:1px solid red;vertical-align:bottom;width:150px;}
+.dot{display:inline-block;overflow:hidden;-webkit-animation:dots 3s step-start infinite;animation:dots 3s step-start infinite;color:#fff;}
+@-webkit-keyframes dots {
+    0%{width:0;}
+    20%{width:5px;}
+    50%{width:10px;}
+    100%{width:20px;}
+}
+@keyframes dots {
+    0%{width:0;}
+    20%{width:5px;}
+    50%{width:10px;}
+    100%{width:20px;}
+}
+.bk{background:#000;}
+</style>
+
+
+
+<script src="../../js/libs/jquery-1.11.1.min.js"></script>
+<!--<script src="jquery-1.4.2.min.js"></script>-->
+<!--<script src="rank.js"></script>-->
+<!--<picture>-->
+    <!--<source srcset="http://www.gbtags.com/gb/laitu/800x400 3x" media="(max-width: 700px)">-->
+    <!--<source srcset="http://www.gbtags.com/gb/laitu/1600x800" media="(min-width: 701px)">-->
+    <!--<img src="http://www.gbtags.com/gb/laitu/1600x800" alt="">-->
+<!--</picture>-->
+<!--<div class="bk">-->
+    <!--<a href="" class="r">-->
+        <!--请求中<span class="dot">...</span>-->
+    <!--</a>-->
+<!--</div>-->
+<div class="" style="width:100px;height:100px;background-color:#000;" id="div"></div>
+<script>
+//    var h = document.getElementById('div').offsetHeight;
+//    var maxh = document.getElementById('div').offsetHeight;
+//    var flg = 1;
+//    setInterval(function(){
+//        h--;
+//        if(h<=-maxh)
+//        {
+//            h = -maxh;
+//        }
+//        if(h<0)
+//        {
+//            document.getElementById('div').style.marginTop=(maxh+h)/2+'px'; console.log(1);
+//            flg = -1;
+//        }else{
+//            document.getElementById('div').style.marginTop=(maxh-h)/2+'px';
+//            flg = 1;
+//        }
+//        document.getElementById('div').style.height = h*flg+'px';
+//    },30);
+
+
+//var obj2 = {'a':1,'b':2,'length':2};
+//var a = [1,2,3];
+
+//    var b = [1,2,3];
+//    b['-10'] = 'ss';
+    //console.log(b);
+    //console.log(new Array(1+1).join('yellow'));
+//console.log(Array.prototype.join.call(obj2,a));
+
+//    var fun = function(fn){
+//        return function(){
+//             console.log(arguments);
+//             fn(arguments[0]);
+//        }
+//    };
+//    fun(function(){
+//        console.log(arguments);
+//    })('1');
+
+
+//    var str="my-class";
+//    str.replace(/[-_][^-_]/g,function(m){ console.log(m.charAt(1));
+//        m.charAt(1).toUpperCase();
+//    });
+
+
+    //var str = "1fsdfsdww344<html><script>alert(1);<\/script></html>";
+    //console.log(str.replace(/<script[^>]*>([\s\S]*)<\/script>/img,''));
+    //var news = str.replace(/<[^<]+>/g,'');console.log(news);
+    function indexOf(target,src,index)
+    {
+        var l = src.length,
+            i=0;
+        if(index>l)
+        {
+            return -1;
+        }
+        i = index<0?i:index;
+        for(;i<l;i++)
+        {
+            if(src.charAt(i)===target)
+            {
+                return i;
+                break;
+            }
+        }
+    }
+    //console.log(indexOf('s','dsfsases',0));
+    //var arr = [1,2,3];
+    //console.log(arr.indexOf(2));
+//    arr.forEach(function(item){
+//        console.log(item);
+//    });
+//    var newarr = arr.map(function(item){
+//        item +=1;
+//        return item;
+//    });
+
+//    var newarr = arr.filter(function(item){
+//        return item>2;
+//    });
+//    console.log(newarr);
+//    var s = arr.reduce(function(prev,next){
+//       //console.log(prev);
+//        return prev+next
+//       //console.log(next);
+//    }); console.log(s);
+//    function remove(target,item)
+//    {
+//        var index = target.indexOf(item);
+//        if(~index){return !!target.splice(index,1).length;}
+//        return false;
+//    }
+
+    //洗牌操作
+    function shuffle(arr)
+    {
+       for(var i=arr.length-1;i;i++)
+       {
+           var tem,random =parseInt(Math.random()*i);
+           tem = arr[i];
+           arr[i] = arr[random];
+           arr[random] = tem;
+       }
+        return arr;
+    }
+    function shuffle1(arr)
+    {
+        var result = arr.sort(function(item){
+            return Math.random() > 0.5;
+        });
+        return result;
+    }
+
+    //去重
+    function unique(target)
+    {
+        var result = [];
+        loop: for(var i= 0,n=target.length;i<n;i++){
+            for(var x = i+1;x<n;x++)
+            {
+                if(target[i]===target[x])
+                {
+                    continue loop;
+                }
+            }
+            result.push(target[i]);
+        }
+        return result;
+    }
+
+    //取交集
+    function interset(target,arr)
+    {
+        target.filter(function(item){
+             return ~arr.indexOf(item);
+        });
+    }
+
+    //min
+    function min(target)
+    {
+        return Math.min.apply(1,target);
+    }
+    //console.log(min([1,2,3,0]));
+
+    //IE下不支持返回插入长度
+    function st()
+    {
+        //var arr = [1,2,3];
+        if([].unshift(1)!=1)
+        {
+           var _unshift = Array.prototype.unshift;
+           Array.prototype.unshift=function()
+           {
+               _unshift.apply(this,arguments);
+               return this.length;
+           }
+           //var i = arr.unshift(arguments);
+           //return i;
+        }
+    }
+
+
+    function splice()
+    {
+        var a = [1,2,3,4];
+        if([1,2,3].splice(1).length==0)
+        {
+            var _splice = Array.prototype.splice;
+            Array.prototype.splice=function(i){
+                if(arguments.length==1)
+                {
+                    return _splice.call(this,i,this.length);
+                }else{
+                    return _splice.apply(this,arguments);
+                }
+            }
+            var m = a.splice(0);
+            console.log(m);
+        }
+    }
+    //splice();   1,2,3,4,5
+
+//    Array.prototype.splice = function(s,d){
+//       var max = Math.max,min=Math.min,
+//           a=[],i=max(arguments.length-2,0)
+//           k=0,l=this.length,e,n,v,x;
+//       s = s||0;
+//       if(s<0)
+//       {
+//           s+=l;
+//       }
+//       s = max(min(isNumber(d)?d:l,l-s),0);
+//       v = i-d;
+//       n = l+v;
+//       while(k<d)
+//       {
+//           e = this[s+k];
+//           if(e!=void 0)
+//           {
+//               a[k] = e;
+//           }
+//       }
+//       x = l-sld;
+//       if(v<0)
+//       {
+//           k=s+i;
+//           while(x)
+//           {
+//               this[k] = this[k-v];
+//               k+=l;
+//               x-=l;
+//           }
+//           this.length = n;
+//       }else if(v>0)
+//       {
+//           k=l;
+//           while(x)
+//           {
+//               this[n-k] = this[l-k];
+//               k+=l;
+//               x-=l;
+//           }
+//       }
+//       for(k=0;k<i;++k)
+//       {
+//           this[s+k] = arguments[k+2];
+//       }
+//       return a;
+//    }
+
+    var toInteger = function(n)
+    {
+        n=+n;
+        if(n!=n)
+        {
+            n=0;
+        }else if(n!==0 && n!==(1/0) && n!==-(1/0))
+        {
+            n = (n>0 || -1)*Math.floor(Math.abs(n));
+        }
+        return n;
+    }
+    function pow(x,n,acc)
+    {
+        return (n===0?acc:(n%2===1?pow(x,n-1,acc*x):pow(x*x,n/2,acc)));   //(4,1,2) (4,0,8)=8    //(4,2,2) (16,1,2) (16,0,32)=32
+    }
+
+</script>
+<input type="file" id="file">
+<img src="" alt="" id="img">
+<script>
+
+//    var v=document.getElementById('file');
+//    v.onchange = function(){
+//        //console.log(window.URL);
+//        document.getElementById('img').src= window.URL&&window.URL.createObjectURL&&window.URL.createObjectURL(v.files[0]) || v.value;
+//    }
+//    Function.prototype.bind = function(context){
+//        if(arguments.length<2 && context == void 0) return false;
+//        var _method = this,args = [].slice.call(arguments,1);
+//        return function(){
+//            //return _method.apply(context,args.concat.apply(args,arguments));
+//            var k = args.concat.apply(args,arguments);
+//            return _method.apply(context,['123','456']);
+//        }
+//    };
+//    var a=[];
+//    var f = new Function();
+//    var b = function(a,b){ console.log(a);console.log(b);};
+    //(b.bind(undefined,'123'))('456');
+    //console.log(bind);
+
+//    var obj = {};
+//    function c(p,t)
+//    {
+//        console.log(p);console.log(t);
+//    }
+//    c.apply(obj,[1,2,3]);
+
+    var bind = function(bind){
+        return {
+            bind:bind.bind(bind),
+            call:bind.bind(bind.call),
+            apply:bind.bind(bind.apply)
+        }
+    }(Function.prototype.bind);
+
+    function cur(fn)
+    {
+        function inner(len,arg)
+        {
+            if(len==0)
+            {
+                fn.apply(null,arg);
+            }else{
+                return function(x){
+                     return inner(len-1,arg.concat(x));
+                }
+            }
+        };
+        return inner(fn.length,[]);
+    };
+    function sum(x,y,z,w)
+    {
+       return x+y+z+w;
+    }
+    //cur(sum)('a');
+    //var args = {a:1,b:2,length:2};
+    //var brgs = [1,2];
+    //console.log(Array.apply([],args));
+    //console.log(Array([1,2]));
+</script>
+<!--<iframe id="ifs" src="http://www.csdn.net"></iframe>-->
+<a href="" id="click">click</a>
+<span id="stime"></span>
+<script>
+var i =0 ;
+var doc = document.getElementById('stime');
+var t = 0;
+var ot = 0;
+//t = (new Date()).getTime();
+//start();
+function start()
+{
+    t = (new Date()).getTime();
+    setTimeout(moves,1000);
+}
+function moves(){
+
+//    if(i>=100)
+//    {
+//        i=0;
+//    }
+    i++;
+    doc.innerHTML = i;
+    ot = (new Date()).getTime();
+    if(ot-t>1000)
+    {   console.log(1);
+        start();
+    }
+}
+
+//console.log(/a(b)/g.exec("abcdab"));
+//console.log("abcdab".match(/a(b)/));
+//console.log(/(chrome)[\/]([\w.]+)/i.exec(navigator.userAgent));
+
+</script>
+<script type="text/javascript" src="zepto.min.js"></script>
+<script src="./ckeditor/ckeditor.js"></script>
+<textarea  id="TextArea1" cols="20" rows="2" class="ckeditor">111</textarea>
+<input type="file" class=""  name="files" id="dd"/>
+<script>
+    //CKEDITOR.replace('TextArea1');
+    //console.log(CKEDITOR.instances.window);
+    //console.log(CKEDITOR.editor.element);
+    //console.log(document.getElementById('cke_126_uiElement'));
+
+
+//    var scrollfun = function(fn,t){
+//         var tim = null;
+//         return function(){
+//             clearTimeout(tim);
+//             tim = null;
+//              tim=setTimeout(function(){
+//                  fn();
+//              },t);
+//         }
+//    };
+//
+//   window.onscroll = scrollfun(function(){console.log(1);},1000);
+</script>
+
+<style type="text/css">
+    *{padding:0;margin:0;}
+
+    .box{width:60%; margin:60px auto 0; padding:20px; background:#f5f5f5;}
+    .content{display:table-cell; *display:inline-block;}
+    .l{float:left;}
+    .border {
+        background-image:linear-gradient(180deg, red, red 50%, transparent 50%),
+        linear-gradient(270deg, red, red 50%, transparent 50%),
+        linear-gradient(0deg, red, red 50%, transparent 50%),
+        linear-gradient(90deg, red, red 50%, transparent 50%);
+        background-size: 100% 1px,1px 100% ,100% 1px, 1px 100%;
+        background-repeat: no-repeat;
+        background-position: top, right top,  bottom, left top;
+        padding: 10px;
+    }
+</style>
+<a href="" name="md" id="md">ddddd</a>
+<div class="box f9 fix">
+    <a href="#prettyGirl" class="l mr10" data-a = 1 id="l"><img border="0" src="http://image.zhangxinxu.com/image/study/s/s128/mm2.jpg" /></a>
+    <div class="content">
+        <p><a href="#prettyGirl">大美女一枚</a> 来自上海</p>
+        <p class="mt5">签名：想找个保鲜盒把你给我的那些感动都装起来。当你让我伤心的时候就拿出来回味一下。</p>
+        <p class="mt5">微博：坐在办公室，只听轰隆隆几声巨响，晴天也能打雷吗？原来街对面的芭莎咖啡厅被炸成了两截。这定点爆破也太失败了，也不清下场，把路过的汽车震得灰头土脸，愣在路中央不知如何是好。其次，房子只炸了一半，另一半屹立不倒，是乍药太水还是房子质量太好？</p>
+    </div>
+</div>
+<div class="border">111</div>
+<select id="select"></select>
+<script>
+//var select = document.getElementById('select');
+//var option = document.createElement('option');
+//select.appendChild(option);
+//alert(option.selected);
+//select.selectedIndex;
+//alert(option.selected);
+function A()
+{
+   this.name=1;
+}
+function B()
+{
+    A.call(this,arguments)
+}
+function C()
+{
+
+}
+A.prototype = {
+    b:1,
+    method:function(){
+        console.log(this.b);
+    }
+};   //new Object(); Object.prototype   constructor attr fun
+//A.prototype.name=1;
+//A.prototype.method = function(){
+//    console.log(this.name);
+//};
+//B.prototype = A.prototype;
+//var b = new A();
+//var b1 = new B();
+//console.log(b);console.log(b1);
+//b1.a = 's';
+
+
+//for(var c in A.prototype)
+//{
+//    B.prototype[c] = A.prototype[c];
+//}
+//B.prototype.b=2;
+//var a = new A();
+//var b = new B();
+//C.prototype = A.prototype;
+//B.prototype = new C();
+//
+//A.prototype.a = 1;
+//B.prototype.b=2;
+(function(){
+    var initia = false,fntest = /xyz/.test(function(){
+        xyz;
+    })? /\b_super\b/ : /.*/;
+
+    this.Class = function(){};
+    Class.extend = function(prop){
+       var _super = this.prototype;
+
+       initia = true;
+       var prototype = new this();
+       initia = false;
+       for(var name in prop)
+       {
+           prototype[name] = typeof prop[name] === 'function' && typeof _super[name] === 'function' && fntest.test(prop[name]) ? (function(name,fn){
+                return function(){
+                    var tmp = this._super;
+                    this._super = _super[name];
+                    var ret = fn.apply(this,arguments);
+                    this._super = tmp;
+                    return ret;
+                };
+           })(name,prop[name]) : prop[name];
+       }
+
+      function Class()
+      {
+           if(!initia && this.init)
+           {
+               this.init.apply(this,arguments);
+           }
+      }
+
+      Class.prototype = prototype;
+      Class.prototype.constructor = Class;
+      Class.extend = arguments.callee;
+      return Class;
+    };
+})();
+
+var Animal = Class.extend({
+    init:function(name){this.name=name;},
+    shout:function(s){console.log(s);}
+});
+
+var animal = new Animal();
+//animal.shout('animal');
+var Dog = Animal.extend({
+  init:function(name,age){
+      this._super.apply(this,arguments);
+      this.age = age;
+  },
+  run:function(s){
+      console.log(s);
+  }
+});
+//
+var dog = new Dog("dog",4);
+//console.log(dog.name);
+//dog.shout("xxx");
+//dog.run("run");
+
+
+//(function(){
+//    this.Abc = function(){};
+//    Abc.extend=function(pro){
+//         var a = new this();
+//         function Abc()
+//         {
+//             console.log(this);
+//         };
+//        Abc.prototype = a;
+//        Abc.prototype.constructor = Abc;
+//        return Abc;
+//    };
+//})();
+//var abc = Abc.extend({
+//     a:1
+//});
+//var bk = new abc();
+
+function def(name)
+{
+    console.log("def("+name+") called");
+    var obj = {
+        valueOf:function(){
+            console.log(name+"(valueOf)");
+        }
+    }
+    return obj;
+}
+//def('dog')<def('animal');
+function testc()
+{
+    //console.log(arguments.callee);
+    function a()
+    {
+        console.log(arguments.callee.caller);
+    }
+    a();
+}
+//testc();
+//var news = window.open('','new window','width=200,height=200');
+//news.document.write('ddd');
+//news.focus(); alert(news.opener);
+//news.opener.document.write('eee');
+
+//document.domain = "csdn.net";
+</script>
+
+<script>
+    (function(){
+        var t = true;
+        var f = true;
+        t?(function(f){
+            if(!f)
+            {
+                return false;
+            }
+            $(window).on('scroll',function(){
+                console.log(1);
+            });
+        }(f)):void(0);
+    })();
+
+</script>
+<a href="" type="a" id="a">这里测试</a>
+<script>
+    var host = window.location.host;
+    $("#a").on('click',function(){
+        var type = $(this).attr('type');
+        $.ajax({
+            url:'../../test/test.php',
+            data:{
+                dataid:1
+            },
+            type:'get',
+            success:function(res){
+                console.log(res);
+            },
+            error:function()
+            {
+                 console.log(2);
+                 //
+            }
+        });
+//        ta(function(sk){
+//            if(sk)
+//            {
+//                window.location.assign(host+'?'+type+'=1&sk='+sk+'#md');
+//            }
+//
+//        });
+
+        return false;
+    });
+    function ta(callback)
+    {
+        callback('sk');
+    }
+</script>
+</body>
+</html>
