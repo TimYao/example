@@ -1,0 +1,47 @@
+<script type="text/javascript" src="/javascripts/WdatePicker.js"></script>
+<div class="col-lg-10 col-md-9 ucbg-white">
+    <div class="col-lg-10 col-md-9 ucbg-white">
+        <div class="uc-inpli">
+            <h2 class="uc-r-tit">创建子专题</h2>
+            <form class="form-horizontal" id="form1" method="post" name="form1" role="form" action="/topic/create" onsubmit="return checkForm();">
+                <div class="col-lg-10  ucpl0">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">请选择子专题的日期：</label>
+                        <div class="col-sm-4">
+                            <input type="hidden" name="base_id" value="<%= base_id %>" />
+                            <input class="form-control" value="" onclick="WdatePicker()" id="name" type="text" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-2">
+                            <input class="btn btn-primary" value="确定" type="submit">
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="btn btn-primary" id="" value="取消" type="button" onClick="cancle()">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        leftmenu_select(2, 0);
+    });
+    function cancle(){
+        location.href="/topic/list";
+    }
+
+    function checkForm(){
+        if($('#name').val() == ''){
+            alert('子专题名称不能为空');
+            return false;
+        }
+    }
+    <% if(typeof(msg) != 'undefined' && msg != ''){ %>
+        alert('<%= msg%>');
+    <% } %>
+</script>

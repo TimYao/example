@@ -1,0 +1,103 @@
+<div class="col-lg-2 col-md-3">
+    <!-- left begin -->
+    <div class="panel-group uc-left-menu" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed">
+                        知识库管理
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/base/list">知识库列表</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">
+                        专家管理
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/expert/list">专家列表</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">
+                    	专题管理
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+            		<a href="/topic/list">专题列表</a>
+                </div>
+            </div>
+        </div>
+				<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed">
+                        收录内容
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/content/list">收录内容列表</a>
+                    <a href="/content/new">后台收录内容</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="collapsed">
+                        周报管理
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/weekly/edit">最新推荐</a>
+                    <a href="/weekly/list">周报记录</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="collapsed">
+                        系统管理
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/logs">日志管理</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- left end -->
+</div>
+<script type="text/javascript">
+	function leftmenu_select(topIndex, childIndex){
+  	if(topIndex >= 0){
+    	$("#accordion>div:eq(" + topIndex + ") a.collapsed").trigger("click");
+    }
+    if(childIndex >= 0){
+    	$("#accordion>div:eq(" + topIndex + ") div.panel-body a").removeClass("on");
+      $("#accordion>div:eq(" + topIndex + ") div.panel-body a:eq(" + childIndex + ")").addClass("on");
+    }
+	}
+</script>

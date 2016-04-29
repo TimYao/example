@@ -1,0 +1,78 @@
+<div class="col-lg-10 col-md-9 ucbg-white">
+	<div class="uc-inpli">
+	<form class="form-horizontal" id="form1" method="post" name="form1" role="form" action="/base/sort">
+		<h1 class="uc-r-tit">知识库列表</h1>
+		<div class="csdn-pagination ucfr">
+				<h5><a href="/base/edit">+ 新建知识库</span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick='$("#form1").submit();''>保存排序</a></h5>
+		</div>
+		<div class="uc-inpli" style="white-space: nowrap;">
+			<!--高级查询结束-->
+			<table class="table table-hover table-bordered" id="itemlist">
+				<thead>
+					<tr>
+						<th width="30">排序</th>
+						<th width="80">知识库</th>
+						<th width="40">专家人数</th>
+						<th width="40">订阅人数</th>
+						<th width="40">收录内容</th>
+						<th width="80">创建时间</th>
+						<th width="60">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% list.forEach(function(d){ %>
+					<tr>
+						<td align="center"><class="uc-ico-id" target="_blank">
+						<input type="text" value="<%=d.sort%>" 
+							style="width: 50px; 
+							border: 0;
+    						text-align: c;
+    						text-align: center;
+						" name='sort[<%=d.id%>]'></td>
+						<td align="center"><class="uc-ico-id" target="_blank"><%=d.name%></td>
+						<td align="center"><a href="/expert/list?baseId=<%=d.id%>"><%=d.expert%>名</td>
+						<td align="center"><%=d.sub%>名</td>
+						<td align="center"><a href="/content/list?base_id=<%=d.id%>"><%=d.content%>条</td>
+						<td align="center"><%=d.create_at%></td>
+						<td align="center">
+							<% if(d.status) { %>
+								<a class="uc-txt-ico" href="/base/edit?base_id=<%=d.id%>">编辑</a>
+								<a class="uc-txt-ico tagclick" href="/node/list?id=<%=d.id%>&level=1">分类</a>
+								<a class="uc-txt-ico tagclick" href="/knowledge/list?base_id=<%=d.id%>&base_title=<%=d.name%>">知识点</a>
+							<% } else { %>
+								<a class="uc-txt-ico" href="/base/edit?base_id=<%=d.id%>">编辑</a>
+								<a class="uc-txt-ico tagclick" href="/node/list?id=<%=d.id%>&level=1">分类</a>
+								<a class="uc-txt-ico tagclick" href="/knowledge/list?base_id=<%=d.id%>&base_title=<%=d.name%>">知识点</a>
+								<a class="uc-txt-ico tagclick" href="/base/release?base_id=<%=d.id%>">发布</a>
+							<% } %>
+						</td>
+					</tr>
+					<% }) %>
+				</tbody>
+			</table>
+			<div class="csdn-pagination ucfr">
+				<%- partial('shared/partial-pager.ejs', {model: pageModel})%>
+			</div>
+		</div>
+	</form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+  		leftmenu_select(0, 0);
+  		if(<%=remodel%>==-1){
+  			alert('发布失败!');
+  			location.href="/base/list";
+  		}
+  		else if(<%=remodel%>==1){
+  			alert('发布成功!');
+  			location.href="/base/list";
+  		}
+  		else if(<%=remodel%>==3){
+  			alert('专家和收录数不满足, 发布失败!');
+  			location.href="/base/list";
+  		}
+  	});
+</script>

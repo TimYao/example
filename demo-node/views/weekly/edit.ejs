@@ -1,0 +1,114 @@
+<%
+function getType(type){
+    var name = '文章';
+    if(type == 2){
+        name = '视频';
+    }
+    else if(type == 3){
+        name = '文档';
+    }
+    else if(type == 4){
+        name = '问答';
+    }
+    else if(type == 5){
+        name = '代码';
+    }
+    return name;
+}
+
+function getBaseName(info){
+    var name = '';
+    var baseArr = new Array();
+    for(var k in info){
+        var baseName = info[k].baseName;
+        baseArr.push(baseName);
+        if(baseArr.indexOf(info[k].baseName) == k)
+            if(name){
+                name += ' - ' + baseName + '知识库';
+            }
+            else{
+                name = baseName + '知识库';
+            }
+    }
+    return name;
+}
+%>
+
+<div class="col-lg-10 col-md-9 ucbg-white">
+    <div class="uc-inpli">
+        <form class="form-horizontal" id="form1" method="get" name="form1" role="form" action="/weekly/publish">
+            <input type="hidden" name='weeklyId' value="<%=weekly.id%>">
+            <h1 class="uc-r-tit">本周推荐:  第 <%= weekly.id%> 期 (<%= weekly.name%>)</h1>
+            <% if(weekly.status == 0) { %>
+                <div class="csdn-pagination ucfr">
+                    <h5>
+                        <% if(!promotion){ %>
+                        <a href="#" onclick="add_promotion();">+ 添加推广</a>
+                        <%}%>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" onclick="add_content();">+ 添加内容</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" onclick='$("#form1").submit();'>发送周报</a>
+                    </h5>
+                </div>
+            <% } %>
+            <div class="csdn-pagination ucfr">
+
+                <table class="table table-hover table-bordered" id="itemlist">
+                    <thead>
+                    <tr>
+                        <th width="60%">内容</th>
+                        <th>所属知识库</th>
+                        <th width="10%">类型</th>
+                        <%if(weekly.status == 0){%>
+                        <th width="10%">操作</th>
+                        <%}%>
+                    </tr>
+                    </thead>
+                    <tbody id="list_tbody">
+                    <% content.forEach(function(l){ %>
+                    <tr>
+                        <td align="left">
+                            <a href="<%= l.url %>" class="uc-ico-id" target="_blank"><%=l.title%></a>
+                        </td>
+                        <td align="center"> <%=getBaseName(l.relation)%>  </td>
+                        <td align="center"> <%=getType(l.content_type)%>  </td>
+                        <%if(weekly.status == 0){%>
+                        <td align="center">
+                            <a href="/weekly/delete_content?content_id=<%=l.id %>&weekly_id=<%=weekly.id%>">移除</a>
+                        </td>
+                        <%}%>
+                    <tr>
+                    <%})%>
+                        <% if(promotion){ %>
+                    <tr>
+                        <td align="left">
+                            <a href="<%= promotion.url %>" class="uc-ico-id" target="_blank"><%=promotion.title%></a>
+                        </td>
+                        <td align="center">  </td>
+                        <td align="center"> 推广 </td>
+                        <%if(weekly.status == 0) {%>
+                        <td align="center">
+                            <a href="#" onclick="add_promotion();">编辑</a>
+                        </td>
+                        <%}%>
+                    <tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function(){
+        leftmenu_select(4, 0);
+    });
+    function add_content(){
+        document.location.href= '/weekly/add';
+    };
+    function add_promotion(){
+        document.location.href = '/weekly/promotion';
+    };
+
+</script>

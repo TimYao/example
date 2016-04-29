@@ -1,0 +1,154 @@
+<link rel="stylesheet" href="/stylesheets/layer.css">
+<script type="text/javascript" src="/javascripts/knowledge_base.js"></script>
+<script src="http://js.job.csdn.net/common/pop/jquery.larkyPopWindow.js" type="text/javascript"></script>
+<script src="http://js.job.csdn.net/common/pop/jquery.larkyPopWindow.DropList.js" type="text/javascript"></script>
+<script src="http://js.job.csdn.net/common/pop/jquery.larkyPopWindow.DropList.LocationSelector.js" type="text/javascript"></script>
+
+		<div class="uc-inpli">
+			<h2 class="uc-r-tit">专家列表</h2>
+			<form class="form-horizontal" id="form1" method="get" name="form1" role="form" action="?">
+				<div class="form-group">
+					<label for="platType" class="col-sm-2 control-label">知识库</label>
+					<div class="col-sm-10">
+						<select id="baseId" class="form-control" name="baseId">
+							<option value="0">全部</option>
+							<% bases.forEach(function(base){ %>
+							<option value="<%=base['id']%>" <%if(base['id'] == searchBaseId){%>selected<%}%>><%=base['name']%></option>
+							<%})%>
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input class="btn btn-primary" value="查找" type="submit">
+						<a href="/expert/add"><input type="button" class="btn btn-primary" value="添加专家"></a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="uc-inpli">
+			<!--高级查询结束-->
+			<table class="table table-hover table-bordered" id="itemlist">
+				<thead>
+				<tr>
+					<th width="80">用户名</th>
+					<th width="60">专家</th>
+					<th width="60">所属知识库</th>
+					<th width="150">负责知识点</th>
+					<th width="60">收录数</th>
+					<th width="60">不收录数</th>
+					<th width="60">取消收录数</th>
+					<th width="60">重归类数</th>
+					<th width="80">操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% expertList.forEach(function(expert){ %>
+				<tr>
+					<td align="center">
+						<%=expert.username%>
+					</td>
+					<td align="center">
+						<%=expert.realname%>
+					</td>
+					<td align="center">
+						<%=expert.base_name%>
+					</td>
+					<td align="center">
+						<%if(expert.knowledge_names.length > 0){%>
+							<%expert.knowledge_names.forEach(function(konw_name){%>
+							<%=konw_name%>&nbsp;&nbsp;
+						<%
+							})
+						}%>
+					</td>
+					<td align="center">
+						<%=expert.yes_num%>
+					</td>
+					<td align="center">
+						<%=expert.no_num%>
+					</td>
+					<td align="center">
+						<%=expert.cancle_num%>
+					</td>
+					<td align="center">
+						<%=expert.reclass_num%>
+					</td>
+					<td align="center">
+						<a class="uc-txt-ico" href="/expert/edit?id=<%=expert.id%>">
+							编辑专家
+						</a>
+						<a class="uc-txt-ico tagclick" href="" data-type="0" data-layer-id="1" data-id="<%=expert.username%>">
+							分配知识点
+						</a>
+					</td>
+				</tr>
+				<%})%>
+				</tbody>
+			</table>
+			<div class="csdn-pagination ucfr">
+				<%- partial('shared/partial-pager.ejs', {model: pageModel})%>
+			</div>
+		</div>
+
+
+
+
+
+<!-- 分配知识点弹窗-->
+<div class="windowLayer windowLayerwh borders">
+	<div class="windowContent">
+		<form action="/expert/doMangeKl" method="post">
+			<!--Created by yaolx on 2015/11/12. all layer-->
+			<div class="title clearfix">
+				<span>当前位置：<em></em></span><a href="" class="closec">&times</a>
+			</div>
+			<div class="mainContents clearfix">
+				<div class="leftc addScroll">
+					<div class="scrollC scrollDoc scrollMenu">
+						<span class="coltitle">知识结构</span>
+
+					</div>
+					<div class="spanblank scrollblank">
+						<div class="bkblank scrollbars">
+						</div>
+					</div>
+				</div>
+				<div class="rightc addScroll">
+					<div class="scrollC scrollDoc">
+						<span class="coltitle coltitleblank hide">知识点</span>
+						<ul class="listselect clearfix">
+						</ul>
+						<div class="clearfix">
+						</div>
+						<span class="coltitle coltitleblank">已选知识点</span>
+
+						<div class="selectlist">
+							<ul>
+
+							</ul>
+						</div>
+					</div>
+					<div class="spanblank scrollblank">
+						<div class="bkblank scrollbars">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottomc clearfix">
+				<input type="hidden" value="" id="subhide" name="knowledge_ids">
+				<input type="hidden" value="1" id="content_status" name="content_type">
+				<input type="submit" value="完成" id="subClick" class="subClick">
+			</div>
+		</form>
+	</div>
+</div>
+<div class="marklayer whitebk"></div>
+<!-- //分配知识点弹窗end-->
+
+<script>
+	$(function(){
+		leftmenu_select(1, 0);
+	});
+</script>

@@ -1,0 +1,11 @@
+[{
+    "name": "knowledge.csdn.net",
+    "script": "bin/www",
+    "instances": "max",
+    "exec_mode": "cluster_mode",
+    "port": 3000,
+    "env": {
+        "NODE_ENV":"production"
+    }
+}
+]

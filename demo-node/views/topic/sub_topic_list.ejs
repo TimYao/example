@@ -1,0 +1,68 @@
+<div class="col-lg-10 col-md-9 ucbg-white">
+    <div class="uc-inpli">
+        <h2 class="uc-r-tit"><%= baseName%>专题</h2>
+        <div class="csdn-pagination ucfr">
+
+            <table class="table table-hover table-bordered" id="itemlist">
+                <thead>
+                <tr>
+                    <th>专题日期</th>
+                    <th>专题内容</th>
+                    <th>专题状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="list_tbody">
+                <%list.forEach(function(l){%>
+                <tr>
+                    <td align="center">
+                        <a href="/topic/<%= l.id%>/edit" ><%= l.name %></a>
+
+                    </td>
+                    <td align="center">
+                        <%= topic_counts[l.id] || 0 %>
+                    </td>
+                    <td align="center" id="td-publish-<%= l.id %>">
+                        <%= l.status == 1 ? "已发布" : "未发布" %>
+                    </td>
+                    <td align="center">
+                        <% if(l.status == 0){%>
+                            <a href="javascript:;" onclick="publis_topic('<%= l.id %>');">发布专题</a>
+                        <% }%>
+                        <a href="/topic/<%= l.id%>/edit" >内容编辑</a>
+                    </td>
+                <tr>
+                    <%})%>
+                </tbody>
+            </table>
+            <div class="csdn-pagination ucfr">
+                <%- partial('shared/partial-pager.ejs', {model: pageModel})%>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        leftmenu_select(2, 0);
+    });
+
+    function publis_topic(tid){
+        $.ajax({
+            type: 'post',
+            url: "/topic/publish",
+            data: {topic_id:tid},
+            success: function (result) {
+                if(result.status){
+                    $("#td-publish-" + tid).html("已发布");
+                }else if(result.msg){
+                    alert(result.msg);
+                }else{
+                    alert('发布失败');
+                }
+            },
+            error: function (result) {
+                alert('发布失败');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,245 @@
+.col-lg-10
+{
+    position: static;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+.kn_left {
+    float: left;
+}
+.kn_right {
+    float: right;
+}
+.windowLayer {
+    position: fixed;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    display: none;
+    margin-left: -363px;
+    margin-top:-277px;
+}
+.closec {
+    color: #666;
+    font-size: 26px;
+    float: right;
+    font-weight: bold;
+}
+.marklayer {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    left: 0;
+}
+.whitebk {
+    background-color: #fff;
+    opacity: 0.8;
+}
+.borders {
+    border-left: 1px solid #cad1d7;
+    border-right: 1px solid #cad1d7;
+    border-bottom: 1px solid #cad1d7;
+}
+.title {
+    background: #eff4f7;
+    height: 55px;
+    padding: 0 25px;
+    line-height: 55px;
+    border-bottom: 1px solid #cad1d7;
+    overflow: hidden;
+}
+.title span {
+    color: #333;
+    font-size: 18px;
+    float: left;
+}
+.title span em {
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 5px;
+}
+.coltitle {
+    font-size: 18px;
+    color: #333;
+}
+.coltitleblank {
+    margin: 0 20px;
+}
+.leftc {
+    float: left;
+    position: relative;
+    width: 275px;
+    height: 499px;
+}
+.leftc .scrollDoc {
+    padding: 20px;
+}
+.spanblank {
+    background: #eff4f7;
+    width: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 499px;
+}
+.spanblank .bkblank {
+    background: #cad1d7;
+    width: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 150px;
+}
+.rightc {
+    float: right;
+    width: 522px;
+    position: relative;
+    height: 499px;
+}
+.rightc .scrollDoc {
+    padding: 20px 0px;
+}
+.rightc .listselect {
+    margin: 18px 20px;
+    min-height: 120px;
+    display: none;
+}
+.rightc .listselect li {
+    font-size: 12px;
+    border: 1px solid #bbb;
+    float: left;
+    border-radius: 3px;
+    height: 22px;
+    overflow: hidden;
+    margin: 0 8px 10px 0px;
+}
+.rightc .listselect li span {
+    color: #666;
+    height: 22px;
+    padding: 0 12px;
+}
+.rightc .listselect li a {
+    display: inline-block;
+    border-left: 1px solid #bbb;
+    height: 22px;
+    padding: 0 5px;
+}
+.rightc .listselect li a em {
+    background: url("../images/plus1.gif") no-repeat left center;
+    width: 11px;
+    height: 10px;
+    display: inline-block;
+}
+.rightc .listselect li .root em {
+    background: url("../images/duigou.gif") no-repeat left center;
+}
+.rightc .selectlist {
+    margin-top: 20px;
+    border-bottom: 1px solid #e7ebee;
+}
+.rightc .selectlist ul li {
+    font-size: 14px;
+    border-top: 1px solid #e7ebee;
+    padding: 10px 20px;
+}
+.rightc .selectlist ul li span {
+    color: #333;
+    float: left;
+}
+.rightc .selectlist ul li span em {
+    color: #1e7fd2;
+}
+.rightc .selectlist ul li .rubbish {
+    background: url("../images/rabish.gif") no-repeat left center;
+    display: inline-block;
+    width: 12px;
+    height: 14px;
+    float: right;
+    margin-right: 10px;
+}
+.rightc .selectlist ul .root {
+    background-color: #f5f6f7;
+}
+.listdown {
+    margin-top: 12px;
+}
+.listdown li {
+    font-size: 14px;
+    margin: 5px 0;
+}
+.listdown li a {
+    background: url("../images/plus.gif") no-repeat left center;
+    display: inline-block;
+    padding-left: 20px;
+}
+.listdown li a em {
+    color: #666;
+}
+.listdown li .root em {
+    color: #333;
+    font-weight: bold;
+}
+.listdown li .lessj {
+    background: url("../images/jian.gif") no-repeat left center;
+}
+.listdown li .noclick em {
+    color: #d8d8d8;
+}
+.listdown li .nosub {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+}
+.listdown li .subul {
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+    margin-left: 6px;
+    display: none;
+}
+.listdown li .lastul {
+    border-left: 1px solid #ddd;
+    padding-left: 16px;
+    margin-left: 6px;
+    padding: 0;
+    margin-top: 0;
+    display: none;
+}
+.listdown li .lastul li a {
+    background: url("../images/xian1.png") no-repeat left center;
+}
+.listdown li .lastul li a em {
+    color: #666;
+}
+.bottomc {
+    height: 60px;
+    background-color: #eff4f7;
+    border-top: 1px solid #cbd2d7;
+    text-align: right;
+}
+.bottomc .subClick {
+    background-color: #1e7fd2;
+    color: #fff;
+    font-size: 14px;
+    width: 65px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: none;
+    border-radius: 3px;
+    margin: 15px 20px 0 0;
+}
+.scrollDoc {
+    position: absolute;
+    width: 100%;
+}
+.addScroll {
+    overflow: hidden;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}

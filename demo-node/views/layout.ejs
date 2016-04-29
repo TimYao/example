@@ -1,0 +1,27 @@
+<html>
+<head>
+    <%include shared/htmlhead.ejs%>
+    <title>
+        <%if(typeof(title) != 'undefined' && title){%>
+            <%= title%>
+        <%}else{%>
+            知识库管理后台
+        <%}%>
+    </title>
+</head>
+
+<body>
+<!--页头开始-->
+<%include shared/header.ejs%>
+<div class="container ucmtb30">
+    <!--左导航-->
+    <%include shared/left.ejs%>
+
+    <div class="col-lg-10 col-md-9 ucbg-white">
+        <%- body%>
+    </div>
+</div>
+<!--页尾-->
+<%include shared/footer.ejs%>
+</body>
+</html>

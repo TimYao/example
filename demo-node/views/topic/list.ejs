@@ -1,0 +1,47 @@
+<div class="col-lg-10 col-md-9 ucbg-white">
+    <div class="uc-inpli">
+        <h2 class="uc-r-tit">专题列表</h2>
+        <div class="csdn-pagination ucfr">
+
+            <table class="table table-hover table-bordered" id="itemlist">
+                <thead>
+                <tr>
+                    <th>专题分类</th>
+                    <th>子专题</th>
+                    <th>当前专题期数</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="list_tbody">
+                <%list.forEach(function(l){%>
+                <tr>
+                    <td align="center">
+                       <%= l.name %>专题
+                    </td>
+                    <td align="center">
+                        <a href="/topic/sub_topic?base_id=<%= l.id %>&name=<%=l.name%>"><%= topic_count[l.id] || 0 %></a>
+                    </td>
+                    <td align="center">
+                        <a href="#"><%= new_topic[l.id] %></a>
+                    </td>
+                    <td align="center">
+                        <a href="/topic/new?base_id=<%= l.id %>">新建子专题</a>
+                    </td>
+                <tr>
+                <%})%>
+                </tbody>
+            </table>
+            <div class="csdn-pagination ucfr">
+                <%//- partial('shared/partial-pager.ejs', {model: pageModel})%>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        leftmenu_select(2, 0);
+    });
+</script>
+
+

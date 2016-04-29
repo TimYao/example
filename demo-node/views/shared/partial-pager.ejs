@@ -1,0 +1,26 @@
+<span class="page-nav">
+    <span>共 <%=model.ItemCount%> 条  <%=model.PageCount%>页</span>
+    <%if(model.FirstPageLink.isvalid){%>
+    <a class="btn btn-xs btn-default btn-first" href="<%=model.FirstPageLink.url%>">首页</a>
+    <%}%>
+
+    <%if(model.PreviousPageLink.isvalid){%>
+    <a class="btn btn-xs btn-default btn-prev" href="<%=model.PreviousPageLink.url%>">&lt;</a>
+    <%}%>
+
+    <%model.PageLinks.forEach(function(link){%>
+    <%if(link.isvalid){%>
+    <a class="btn btn-xs btn-default btn-number" href="<%=link.url%>"><%=link.text%></a>
+    <%}else{%>
+    <b><%=link.text%></b>
+    <%}%>
+    <%})%>
+
+    <%if(model.NexusPageLink.isvalid){%>
+    <a class="btn btn-xs btn-default btn-next" href="<%=model.NexusPageLink.url%>">&gt;</a>
+    <%}%>
+
+    <%if(model.LastPageLink.isvalid){%>
+    <a class="btn btn-xs btn-default btn-last" href="<%=model.LastPageLink.url%>">末页</a>
+    <%}%>
+</span>

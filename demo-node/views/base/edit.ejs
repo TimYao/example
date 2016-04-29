@@ -1,0 +1,88 @@
+<div class="col-lg-10 col-md-9 ucbg-white">
+	<div class="uc-inpli">
+		<h2><div class="uc-r-tit"><% if(list.id){ %>编辑知识库<% }else{ %>新建知识库<% } %>
+			<a href="/base/list" class="csdn-pagination ucfr"> < 返回列表 </a>
+		</div></h2>
+	</div>
+	<div class="uc-inpli">
+		<form class="form-horizontal" id="form1" method="post" name="form1" role="form" action="/base/save" enctype="multipart/form-data">
+      		<input type="hidden" name='id' value="<%=list.id%>" />
+      		<input type="hidden" name='imageUrl' value="<%=list.image_url%>" />
+      		<input type="hidden" name='structureUrl' value="<%=list.structure_url%>" />
+      		<input type="hidden" name='backUrl' value="<%=list.background%>" />
+			<div class="form-group">
+  				<label for="type" class="col-sm-2 control-label">技术领域 : </label>
+  				<div class="col-sm-10">
+    				<input class="form-control" value="<%=list.name%>" placeholder="知识库名称" id="name" type="text" name="name">
+				</div>
+			</div>
+			<div class="form-group">
+  				<label class="col-sm-2 control-label">领域简介 : </label>
+  				<div class="col-sm-10">
+  					<textarea  class="form-control" id="desc" name="desc" placeholder="知识库简介"><%=list.description%></textarea>
+  					<div class="ucfl" style="color:red">请输入不超过300字的简介</div>
+				</div>
+			</div>
+			<div class="form-group">
+  				<label for="type" class="col-sm-2 control-label">背景色值 : </label>
+  				<div class="col-sm-10">
+    				<input class="form-control" value="<%=list.color%>" placeholder="背景色值" id="color" type="text" name="color">
+				</div>
+			</div>
+			<div class="form-group">
+  				<label for="type" class="col-sm-2 control-label">hover色值 : </label>
+  				<div class="col-sm-10">
+    				<input class="form-control" value="<%=list.hover%>" placeholder="hover色值" id="hover" type="text" name="hover">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">logo图 : </label>
+				<div class="col-sm-10">
+  				<img src="<%=list.image_url%>" class="csdn-avatar75">
+  				<hr style="height:1px;border:none;border-top:1px solid #555555;" />
+  				<input type="file" name="logo" id="logo" />
+  				<hr style="height:1px;border:none;border-top:1px solid #555555;" />
+			  </div>
+			</div>
+			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">背景图 : </label>
+				<div class="col-sm-10">
+  				<img src="<%=list.background%>" class="csdn-avatar75">
+  				<hr style="height:1px;border:none;border-top:1px solid #555555;" />
+  				<input type="file" name="back" id="back" />
+  				<hr style="height:1px;border:none;border-top:1px solid #555555;" />
+			  </div>
+			</div>
+			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">结构图 : </label>
+				<div class="col-sm-10">
+  				<img src="<%=list.structure_url%>" class="csdn-avatar75">
+  				<hr style="height:1px;border:none;border-top:1px solid #555555;" />
+  				<input type="file" name="structure" id="structure" />
+			  </div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<hr style="height:1px;border:none;border-top:1px solid #555555;" />
+					<input type="submit" value="保存" class="btn btn-primary" id="edit">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		leftmenu_select(0, 0);
+    	if(<%=(list.image_url).length %> == 0){
+      		$("#url").hide();
+   		}
+    	if(<%=remodel%>==-1){
+        	alert('确认数据填写，保存失败!');
+      	}
+      	else if(<%=remodel%>==1){
+        	alert('保存成功!');
+        	location.href="/base/list";
+      	}
+	});
+</script>

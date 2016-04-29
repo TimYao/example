@@ -1,0 +1,214 @@
+<div class="col-lg-10 col-md-9 ucbg-white">
+  <div class="uc-inpli">
+    <h2><div class="uc-r-tit"><%=list.newTitle%>
+      <a href="/node/list?id=<%=list.pid%>&level=<%=list.level%>" class="csdn-pagination ucfr"> < 返回列表 </a>
+    </div></h2>
+  </div>
+	<div class="uc-inpli">
+		<form class="form-horizontal" id="form1" method="post" name="form1" role="form" action="">
+			<div class="form-group">
+  				<label for="type" class="col-sm-2 control-label">节点名称 : </label>
+  				<div class="col-sm-10">
+    				<input class="form-control" value="<%=list.name%>" placeholder="节点名称" id="name" type="text" name="name">
+				</div>
+			</div>
+			<div class="form-group">
+  				<label class="col-sm-2 control-label">节点描述 : </label>
+  				<div class="col-sm-10">
+  					<textarea  class="form-control" id="desc" name="desc" placeholder="节点描述"><%=list.description%></textarea>
+  					<div class="ucfl" style="color:red">请输入不超过100字的简介</div>
+				</div>
+			</div>
+      <div class="form-group" id="knowledge">
+          <label class="col-sm-2 control-label">知识点 : </label>
+          <div class="col-sm-10">
+            <div class="tab_list" id="list_knowledge">
+              <% (list.knowledge).forEach(function(l){ %>
+                <span data-id="<%=l.id%>:<%=l.name%>"><em><%=l.name%></em><a href="">×</a></span>
+              <% }) %>
+            </div>
+            <input type="hidden" value="<%=list.string%>" id="tab_list"/>
+            <input type="button" value="选择知识点" class="btn btn-primary btn-select-button" id="select"">
+        </div>
+      </div>
+			<div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="button" value="保存" class="btn btn-primary" id="save" onclick="saveNode('<%=list.pid%>','<%=list.id%>','<%=list.level%>')">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10" >
+          <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="button" value="删除该节点" class="btn btn-primary" id="del" onclick="delNode('<%=list.pid%>','<%=list.id%>','<%=list.level%>')">
+        </div>
+      </div>
+		</form>
+	</div>
+</div>
+<style>
+.windowlayers{position:fixed;width:600px;height:400px;border:1px solid #ccc;background:#fff;left:50%;top:50%;margin-left:-300px;margin-top:-200px;display:none;padding:20px;}
+.k_title{font-size:21px;font-weight:bold;}
+.chax{position: absolute;right:20px;top:20px;font-size:30px;}
+.checkboxs{margin: 15px;min-height:280px;}
+.checkboxs li{float:left;font-size:13px;margin-right:20px;}
+.checkboxs li label{vertical-align:middle;margin-right:5px;}
+.subtn{text-align:right;}
+.subtn a{display: inline-block;color:#fff;background:#dc3c00;padding:5px 20px;font-size:15px;}
+.tab_list{border:1px solid #ccc;width:600px;padding:10px;margin-bottom:10px;}
+.tab_list span{display:inline-block;color:#696565;background:#ccc;padding:3px 10px;margin-right: 5px}
+.tab_list span em{display:inline-block;margin-right:5px;}
+.tab_list span a{font-size:17px;vertical-align:middle;}
+</style>
+
+<div class="windowlayers">
+  <a href="###" class="chax closed">&times</a>
+  <span class="k_title">知识点</span>
+  <ul class="checkboxs" name="knowledge_list" id="knowledge_list"></ul>
+  <p class="subtn"><a href="###" class="closed">保存</a></p>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+    leftmenu_select(0, 0);
+    if(<%=list.child%>){
+      $("#knowledge").hide();
+    }
+    if(<%=list.create%> || <%=list.child%>){
+      $("#del").hide();
+    }
+    $(".btn-select-button").on('click',function(event){
+        $(".windowlayers").show();
+        var pid = <%=list.pid%>;
+        var level = <%=list.level%>;
+        var info = {};
+        info.pid = pid;
+        info.level = level;
+
+        $.ajax({
+           type:'POST',
+           url:'/node/knowledge',
+           async: false,
+           data: JSON.stringify(info),
+           dataType: "json",
+           contentType: "application/json;charset=utf-8",
+           success: function (data) {
+              if(!data.err){ 
+                var str = '';
+                (data.data).forEach(function(d){ 
+                  str += '<li><label data-v='+'['+d.id+":"+d.name+']'+'><input name="select_list" type="checkbox"></label>'+d.name+'</li>';
+                });
+                $("#knowledge_list").html(str);
+              }
+              else{
+                alert(data.err);
+              }
+           }
+        });
+        return false;
+    });
+
+    //tab list delete
+    var tab_list = $("#tab_list");
+    var v = $.trim(tab_list.val()).split(',');
+    $(".tab_list span a").on('click',function(event){
+       var id = $(this).parent().attr('data-id');
+       var i = $(this).parent().index();
+       $(this).parent().empty().remove();
+       v.splice(i,1);
+       tab_list.val(v.join(','));
+       return false;
+    });
+
+    $(".closed").on('click',function(){
+        $(".windowlayers").hide();
+        var boxes = document.getElementsByName("select_list");
+        var selectList = new Array();
+        var arr = new Array();
+        var tab_list = $("#tab_list");
+        var v = $.trim(tab_list.val()).split(',');
+        var v1 = tab_list.val();
+        for(var k in v){
+          if(v[k]) {
+            arr.push(v[k]);
+          }
+        }
+        for (var i = 0; i < boxes.length; i++){
+          if (boxes[i].checked){
+            selectList[i] = boxes[i].parentNode.getAttribute('data-v');
+            arr.push(selectList[i]);
+          }
+        }
+        var str = '',str1='';
+        arr.forEach(function(d){
+          var id = d.split(':')[0];
+          var name = d.split(':')[1];
+          str += '<span data-id='+id+':'+name+'><em>'+name+'</em><a href="">×</a></span>';
+          str1 +=id+":"+name+",";
+        })
+        // 隐藏域操作
+        tab_list.val(str1.substring(0,str1.length-1)); 
+        $("#list_knowledge").html(str);
+        return false;
+    });
+  });
+
+	function saveNode(pid, id, level){
+    var info = {};
+    info.name = $('#name').val();
+    info.desc = $('#desc').val();
+    info.pid = pid;
+    info.id = id;
+    info.level = level;
+    info.knowledge = $('#tab_list').val();
+    
+    $.ajax({
+        type: 'POST',
+        url: '/node/save',
+        async: false,
+        data: JSON.stringify(info),
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+          if(data.err){
+            alert(data.err+', 保存失败');
+          }
+          else{
+            alert("保存数据成功!");
+            location.href="/node/list?id=<%=list.pid%>&level=<%=list.level%>";
+          }
+        }
+    });
+	}
+
+  function delNode(pid, id, level){
+    var queren = confirm("确定删除该节点？");
+    if(queren == true){
+      var info = {};
+      info.pid = pid;
+      info.id = id;
+      info.level = level;
+      
+      $.ajax({
+          type: 'POST',
+          url: '/node/del',
+          async: false,
+          data: JSON.stringify(info),
+          dataType: "json",
+          contentType: "application/json;charset=utf-8",
+          success: function (data) {
+            if(data.err){
+              alert(data.err+', 删除失败');
+            }
+            else{
+              alert("删除成功!");
+              location.href="/node/list?id=<%=list.pid%>&level=<%=list.level%>";
+            }
+          }
+      });
+    }
+  }
+</script>
